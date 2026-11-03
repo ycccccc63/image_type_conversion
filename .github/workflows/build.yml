@@ -2,6 +2,9 @@ name: Build Windows EXE
 
 on: 
   workflow_dispatch:
+  push:
+    tags:
+      - 'v*'  # 當推送到以 v 開頭的 Tag 時會自動發布 Release
 
 jobs:
   build:
@@ -17,13 +20,13 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install pillow pyinstaller
+          pip install pillow numpy pyinstaller
 
       - name: Build Executable
         run: |
-          pyinstaller --noconsole --onefile --name ImageConverter Pillow.py
+          pyinstaller --noconsole --onefile --name ImageConverter app.py
 
-      - name: Upload EXE
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: ImageConverter-EXE
