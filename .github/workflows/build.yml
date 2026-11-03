@@ -24,7 +24,7 @@ jobs:
 
       - name: Build Executable
         run: |
-          pyinstaller --noconsole --onefile --name ImageConverter app.py
+          pyinstaller --noconsole --onefile --name ImageConverter pillow.py
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
